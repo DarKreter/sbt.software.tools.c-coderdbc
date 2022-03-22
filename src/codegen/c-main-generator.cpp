@@ -205,18 +205,18 @@ void CiMainGenerator::Gen_MainHeader()
     // write message typedef s and additional expressions
     MessageDescriptor_t& m = sigprt->sigs_expr[num]->msg;
 
-    fwriter->AppendLine(StrPrint("uint32_t Unpack_%s_%s(%s_t* _m, const uint8_t* _d, uint8_t dlc_);",
-        m.Name.c_str(), fdesc->DrvName_orig.c_str(), m.Name.c_str()));
+    fwriter->AppendLine(StrPrint("uint32_t Unpack_%s(%s_t* _m, const uint8_t* _d, uint8_t dlc_);",
+        m.Name.c_str(), m.Name.c_str()));
 
     fwriter->AppendLine(StrPrint("#ifdef %s", fdesc->usesruct_def.c_str()));
 
-    fwriter->AppendLine(StrPrint("uint32_t Pack_%s_%s(%s_t* _m, __CoderDbcCanFrame_t__* cframe);",
-        m.Name.c_str(), fdesc->DrvName_orig.c_str(), m.Name.c_str()));
+    fwriter->AppendLine(StrPrint("uint32_t Pack_%s(%s_t* _m, __CoderDbcCanFrame_t__* cframe);",
+        m.Name.c_str(), m.Name.c_str()));
 
     fwriter->AppendLine("#else");
 
-    fwriter->AppendLine(StrPrint("uint32_t Pack_%s_%s(%s_t* _m, uint8_t* _d, uint8_t* _len, uint8_t* _ide);",
-        m.Name.c_str(), fdesc->DrvName_orig.c_str(), m.Name.c_str()));
+    fwriter->AppendLine(StrPrint("uint32_t Pack_%s(%s_t* _m, uint8_t* _d, uint8_t* _len, uint8_t* _ide);",
+        m.Name.c_str(), m.Name.c_str()));
 
     fwriter->AppendLine(StrPrint("#endif // %s", fdesc->usesruct_def.c_str()), 2);
   }
@@ -261,8 +261,8 @@ void CiMainGenerator::Gen_MainSource()
     MessageDescriptor_t& m = sigprt->sigs_expr[num]->msg;
 
     // first function
-    fwriter->AppendLine(StrPrint("uint32_t Unpack_%s_%s(%s_t* _m, const uint8_t* _d, uint8_t dlc_)\n{",
-        m.Name.c_str(), fdesc->DrvName_orig.c_str(), m.Name.c_str()));
+    fwriter->AppendLine(StrPrint("uint32_t Unpack_%s(%s_t* _m, const uint8_t* _d, uint8_t dlc_)\n{",
+        m.Name.c_str(), m.Name.c_str()));
 
     // put dirt trick to avoid warning about unusing parameter
     // (dlc) when monitora are disabled. trick is better than
@@ -277,16 +277,16 @@ void CiMainGenerator::Gen_MainSource()
     fwriter->AppendLine(StrPrint("#ifdef %s", fdesc->usesruct_def.c_str()), 2);
 
     // second function
-    fwriter->AppendLine(StrPrint("uint32_t Pack_%s_%s(%s_t* _m, __CoderDbcCanFrame_t__* cframe)",
-        m.Name.c_str(), fdesc->DrvName_orig.c_str(), m.Name.c_str()));
+    fwriter->AppendLine(StrPrint("uint32_t Pack_%s(%s_t* _m, __CoderDbcCanFrame_t__* cframe)",
+        m.Name.c_str(), m.Name.c_str()));
 
     WritePackStructBody(sigprt->sigs_expr[num]);
 
     fwriter->AppendLine("#else", 2);
 
     // third function
-    fwriter->AppendLine(StrPrint("uint32_t Pack_%s_%s(%s_t* _m, uint8_t* _d, uint8_t* _len, uint8_t* _ide)",
-        m.Name.c_str(), fdesc->DrvName_orig.c_str(), m.Name.c_str()));
+    fwriter->AppendLine(StrPrint("uint32_t Pack_%s(%s_t* _m, uint8_t* _d, uint8_t* _len, uint8_t* _ide)",
+        m.Name.c_str(), m.Name.c_str()));
 
     WritePackArrayBody(sigprt->sigs_expr[num]);
 
