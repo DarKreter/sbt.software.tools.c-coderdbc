@@ -85,8 +85,8 @@ void CiMainGenerator::Gen_MainHeader()
   fwriter->AppendLine(StrPrint("#define %s (%uU)", fdesc->verhigh_def.c_str(), p_dlist->ver.hi));
   fwriter->AppendLine(StrPrint("#define %s (%uU)", fdesc->verlow_def.c_str(), p_dlist->ver.low), 2);
 
-  fwriter->AppendLine("// include current dbc-driver compilation config");
-  fwriter->AppendLine(StrPrint("#include \"%s-config.h\"", fdesc->drvname.c_str()), 2);
+//  fwriter->AppendLine("// include current dbc-driver compilation config");
+//  fwriter->AppendLine(StrPrint("#include \"%s-config.h\"", fdesc->drvname.c_str()), 2);
 
   fwriter->AppendLine(StrPrint("#ifdef %s", fdesc->usemon_def.c_str()));
 
@@ -250,7 +250,7 @@ void CiMainGenerator::Gen_MainSource()
 
   fwriter->AppendLine(StrPrint("#endif // %s", fdesc->usemon_def.c_str()), 3);
 
-  fwriter->AppendLine(StrPrint(extend_func_body, ext_sig_func_name), 1);
+//  fwriter->AppendLine(StrPrint(extend_func_body, ext_sig_func_name), 1);
 
   // for each message 3 functions must be defined - 1 unpack function,
   // 2: pack with raw signature
