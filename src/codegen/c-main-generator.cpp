@@ -210,12 +210,12 @@ void CiMainGenerator::Gen_MainHeader()
 
     fwriter->AppendLine(StrPrint("#ifdef %s", fdesc->usesruct_def.c_str()));
 
-    fwriter->AppendLine(StrPrint("uint32_t Pack_%s(%s_t* _m, __CoderDbcCanFrame_t__* cframe);",
+    fwriter->AppendLine(StrPrint("void Pack_%s(%s_t* _m, __CoderDbcCanFrame_t__* cframe);",
         m.Name.c_str(), m.Name.c_str()));
 
     fwriter->AppendLine("#else");
 
-    fwriter->AppendLine(StrPrint("uint32_t Pack_%s(%s_t* _m, uint8_t* _d, uint8_t* _len, uint8_t* _ide);",
+    fwriter->AppendLine(StrPrint("void Pack_%s(%s_t* _m, uint8_t* _d);",
         m.Name.c_str(), m.Name.c_str()));
 
     fwriter->AppendLine(StrPrint("#endif // %s", fdesc->usesruct_def.c_str()), 2);
@@ -285,7 +285,7 @@ void CiMainGenerator::Gen_MainSource()
     fwriter->AppendLine("#else", 2);
 
     // third function
-    fwriter->AppendLine(StrPrint("uint32_t Pack_%s(%s_t* _m, uint8_t* _d, uint8_t* _len, uint8_t* _ide)",
+    fwriter->AppendLine(StrPrint("void Pack_%s(%s_t* _m, uint8_t* _d)",
         m.Name.c_str(), m.Name.c_str()));
 
     WritePackArrayBody(sigprt->sigs_expr[num]);
@@ -776,9 +776,9 @@ void CiMainGenerator::WritePackArrayBody(const CiExpr_t* sgs)
 {
   fwriter->AppendLine("{");
   PrintPackCommonText("_d", sgs);
-  fwriter->AppendLine(StrPrint("  *_len = %s_DLC;", sgs->msg.Name.c_str()));
-  fwriter->AppendLine(StrPrint("  *_ide = %s_IDE;", sgs->msg.Name.c_str(), 2));
-  fwriter->AppendLine(StrPrint("  return %s_CANID;", sgs->msg.Name.c_str()));
+//  fwriter->AppendLine(StrPrint("  *_len = %s_DLC;", sgs->msg.Name.c_str()));
+//  fwriter->AppendLine(StrPrint("  *_ide = %s_IDE;", sgs->msg.Name.c_str(), 2));
+//  fwriter->AppendLine(StrPrint("  return %s_CANID;", sgs->msg.Name.c_str()));
   fwriter->AppendLine("}", 2);
 }
 
