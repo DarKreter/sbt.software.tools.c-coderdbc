@@ -82,7 +82,7 @@ void CiMainGenerator::Gen_MainHeader()
   fwriter->AppendLine("#include <stdint.h>", 2);
     
     //Add SBT namespace
-    fwriter->AppendLine(StrPrint("namespace SBT::System::Comm::CAN{"), 2);
+    fwriter->AppendLine(StrPrint("namespace SBT::System::Comm{"), 2);
   
   fwriter->AppendLine("// DBC file version");
   fwriter->AppendLine(StrPrint("#define %s (%uU)", fdesc->verhigh_def.c_str(), p_dlist->ver.hi));
@@ -229,7 +229,7 @@ void CiMainGenerator::Gen_MainHeader()
 //  fwriter->AppendLine("#ifdef __cplusplus\n}\n#endif");
   
   //Add SBT namespace
-  fwriter->AppendLine(StrPrint("} //SBT::System::Comm::CAN"), 1);
+  fwriter->AppendLine(StrPrint("} //SBT::System::Comm"), 1);
 
   // save fwrite cached text to file
   fwriter->Flush(fdesc->core_h.fpath);
@@ -247,7 +247,7 @@ void CiMainGenerator::Gen_MainSource()
   fwriter->AppendLine(StrPrint("#include \"%s\"", fdesc->core_h.fname.c_str()), 3);
   
   //Add SBT namespace
-  fwriter->AppendLine(StrPrint("namespace SBT::System::Comm::CAN{"), 2);
+  fwriter->AppendLine(StrPrint("namespace SBT::System::Comm{"), 2);
 
   // put diagmonitor ifdef selection for including @drv-fmon header
   // with FMon_* signatures to call from unpack function
@@ -305,7 +305,7 @@ void CiMainGenerator::Gen_MainSource()
     
   }
   //Add SBT namespace
-  fwriter->AppendLine(StrPrint("} //SBT::System::Comm::CAN"), 1);
+  fwriter->AppendLine(StrPrint("} //SBT::System::Comm"), 1);
   
   fwriter->Flush(fdesc->core_c.fpath);
 }
