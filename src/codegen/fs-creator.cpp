@@ -7,11 +7,11 @@ static const int32_t kTmpLen = 1024;
 
 static char _tmpb[kTmpLen];
 
-static const char* kLibDir = "/lib";
-static const char* kUsrDir = "/usr";
-static const char* kIncDir = "/inc";
-static const char* kConfDir = "/conf";
-static const char* kUtilDir = "/butl";
+static const char* kLibDir = "";
+static const char* kUsrDir = "";
+static const char* kIncDir = "";
+static const char* kConfDir = "";
+static const char* kUtilDir = "";
 
 FsCreator::FsCreator()
 {

@@ -53,19 +53,19 @@ void CiMainGenerator::Generate(DbcMessageList_t& dlist, const FsDescriptor_t& fs
   Gen_MainSource();
 
   // 4 step is to pring fmon head file
-  Gen_FMonHeader();
+//  Gen_FMonHeader();
 
   // 5 step is to print fmon source file
-  Gen_FMonSource();
+//  Gen_FMonSource();
 
   // 6 step is to print template for drv-config.h
-  Gen_ConfigHeader();
+//  Gen_ConfigHeader();
 
   // 7 step is to print canmonitorutil.h template code
-  Gen_CanMonUtil();
+//  Gen_CanMonUtil();
 
   // 8 step is to print dbccodeconf.h template
-  Gen_DbcCodeConf();
+//  Gen_DbcCodeConf();
 }
 
 void CiMainGenerator::Gen_MainHeader()
