@@ -208,7 +208,7 @@ void CiMainGenerator::Gen_MainHeader()
     // write message typedef s and additional expressions
     MessageDescriptor_t& m = sigprt->sigs_expr[num]->msg;
 
-    fwriter->AppendLine(StrPrint("%s_t Unpack_%s(const uint8_t* _d);",
+    fwriter->AppendLine(StrPrint("[[nodiscard]] %s_t Unpack_%s(const uint8_t* _d);",
         m.Name.c_str(), m.Name.c_str()));
 
     fwriter->AppendLine(StrPrint("#ifdef %s", fdesc->usesruct_def.c_str()));
