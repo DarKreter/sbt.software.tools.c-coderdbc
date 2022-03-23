@@ -276,7 +276,7 @@ bool DbcLineParser::ParseSignalLine(SignalDescriptor_t* sig, const std::string& 
       // to pay attention that if SIGFLOAT is enabled, this signal
       // must behave as ReadOnly (_ro)
       sig->NameFloat = sig->Name + "_phys";
-      sig->Name += "_ro";
+//      sig->Name += "_ro";
     }
   }
 
