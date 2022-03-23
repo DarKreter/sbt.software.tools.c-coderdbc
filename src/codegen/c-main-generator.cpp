@@ -207,7 +207,14 @@ void CiMainGenerator::Gen_MainHeader()
   {
     // write message typedef s and additional expressions
     MessageDescriptor_t& m = sigprt->sigs_expr[num]->msg;
-
+    
+    fwriter->AppendLine(StrPrint("/**\n"
+                                 "* @brief Unpacks raw CAN frame payload into %s_t struct\n"
+                                 "* @param _d pointer to payload to unpack\n"
+                                 "* @return %s_t unpacked object\n"
+                                 "*/",
+                               m.Name.c_str(), m.Name.c_str()));
+    
     fwriter->AppendLine(StrPrint("[[nodiscard]] %s_t Unpack_%s(const uint8_t* _d);",
         m.Name.c_str(), m.Name.c_str()));
 
@@ -217,7 +224,13 @@ void CiMainGenerator::Gen_MainHeader()
         m.Name.c_str(), m.Name.c_str()));
 
     fwriter->AppendLine("#else");
-
+    
+      fwriter->AppendLine(StrPrint("/**\n"
+                                   "* @brief Packs %s_t object into raw 8-byte long payload\n"
+                                    "   * @param _m pointer to %s_t object to pack\n"
+                                    "   * @param _d pointer to payload, where %s_t object will be packed\n"
+                                    "   */",
+                                   m.Name.c_str(), m.Name.c_str(), m.Name.c_str()));
     fwriter->AppendLine(StrPrint("void Pack_%s(%s_t* _m, uint8_t* _d);",
         m.Name.c_str(), m.Name.c_str()));
 
