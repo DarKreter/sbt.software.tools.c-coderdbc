@@ -144,7 +144,7 @@ void CiMainGenerator::Gen_MainHeader()
 
       if (!s.IsSimpleSig)
       {
-        fwriter->AppendText(sigprt->PrintPhysicalToRaw(&s, fdesc->DRVNAME));
+        fwriter->AppendText(sigprt->PrintPhysicalToRaw(m,&s, fdesc->DRVNAME));
       }
 
       if (s.Name.size() > max_sig_name_len)

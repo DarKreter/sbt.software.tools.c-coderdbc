@@ -49,7 +49,7 @@ void CSigPrinter::LoadMessage(const MessageDescriptor_t& message)
   sigs_expr.push_back(nexpr);
 }
 
-std::string CSigPrinter::PrintPhysicalToRaw(const SignalDescriptor_t* sig, const std::string& drvname)
+std::string CSigPrinter::PrintPhysicalToRaw(MessageDescriptor_t& m, const SignalDescriptor_t* sig, const std::string& drvname)
 {
   std::string retstr = "";
 
@@ -57,14 +57,14 @@ std::string CSigPrinter::PrintPhysicalToRaw(const SignalDescriptor_t* sig, const
 
   if (sig->IsDoubleSig)
   {
-    retstr += StrPrint("#define %s_%s_CovFactor (%f)\n", drvname.c_str(), sig->Name.c_str(), sig->Factor);
+    retstr += StrPrint("#define %s_%s_%s_CovFactor (%f)\n", drvname.c_str(), m.Name.c_str(), sig->Name.c_str(), sig->Factor);
   }
   else
   {
-    retstr += StrPrint("#define %s_%s_CovFactor (%d)\n", drvname.c_str(), sig->Name.c_str(), (int32_t)sig->Factor);
+    retstr += StrPrint("#define %s_%s_%s_CovFactor (%d)\n", drvname.c_str(), m.Name.c_str(), sig->Name.c_str(), (int32_t)sig->Factor);
   }
 
-  retstr += StrPrint("#define %s_%s_toS(x) ( (%s) ", drvname.c_str(), sig->Name.c_str(),
+  retstr += StrPrint("#define %s_%s_%s_toS(x) ( (%s) ", drvname.c_str(), m.Name.c_str(), sig->Name.c_str(),
       PrintType((uint8_t)sig->TypeRo).c_str());
 
   if (sig->IsDoubleSig)
@@ -90,7 +90,7 @@ std::string CSigPrinter::PrintPhysicalToRaw(const SignalDescriptor_t* sig, const
     }
   }
 
-  retstr += StrPrint("#define %s_%s_fromS(x) ( ", drvname.c_str(), sig->Name.c_str());
+  retstr += StrPrint("#define %s_%s_%s_fromS(x) ( ", drvname.c_str(), m.Name.c_str(), sig->Name.c_str());
 
   if (sig->IsDoubleSig)
   {

@@ -10,7 +10,7 @@ class CSigPrinter {
   void LoadMessage(const MessageDescriptor_t& message);
   void LoadMessages(const std::vector<MessageDescriptor_t*> message);
 
-  std::string PrintPhysicalToRaw(const SignalDescriptor_t* msg, const std::string& drvname);
+  std::string PrintPhysicalToRaw(MessageDescriptor_t& m,const SignalDescriptor_t* msg, const std::string& drvname);
 
  public:
   std::vector<CiExpr_t*> sigs_expr;
