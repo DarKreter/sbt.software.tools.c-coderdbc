@@ -18,7 +18,7 @@ const char* extend_func_body =
   "// globally in @dbccodeconf.h or locally in 'dbcdrvname'-config.h\n"
   "// Type selection may affect common performance. Most useful types are:\n"
   "// bitext_t : int64_t and ubitext_t : uint64_t\n"
-  "static bitext_t %s( ubitext_t val, uint8_t bits )\n"
+  "[[maybe_unused]]static bitext_t %s( ubitext_t val, uint8_t bits )\n"
   "{\n"
   "  ubitext_t const m = 1u << (bits - 1);\n"
   "  return (val ^ m) - m;\n"
@@ -294,9 +294,12 @@ void CiMainGenerator::Gen_MainSource()
 
   fwriter->AppendLine(StrPrint("#include \"%s-fmon.h\"", fdesc->drvname.c_str()), 2);
 
-  fwriter->AppendLine(StrPrint("#endif // %s", fdesc->usemon_def.c_str()), 3);
-
-//  fwriter->AppendLine(StrPrint(extend_func_body, ext_sig_func_name), 1);
+  fwriter->AppendLine(StrPrint("#endif // %s", fdesc->usemon_def.c_str()), 2);
+  
+  fwriter->AppendLine(StrPrint("typedef int64_t bitext_t;\n"
+                               "typedef uint64_t ubitext_t;"), 1);
+  
+  fwriter->AppendLine(StrPrint(extend_func_body, ext_sig_func_name), 1);
 
   // for each message 3 functions must be defined - 1 unpack function,
   // 2: pack with raw signature
